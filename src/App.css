@@ -1,38 +1,111 @@
+#root {
+  display: flex;
+  justify-content: center;
+  background: #f5f5f5;
+}
 .App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+  min-height: 100vh;
+  padding: 1vw 0;
+}
+.App-layout {
+  margin: 0 15px;
+  width: calc(100% - 17vw);
+}
+.main-header {
+  color: black;
+  font-size: 6vw;
+  font-weight: bold;
+  margin-bottom: 1vw;
+}
+
+/* MAIN COMPONENT */
+.main-component-layout {
+  border: 2px solid #e5e5e5;
+  border-radius: 1vw;
+  padding: 2vw;
+  background: #ffffff;
+  margin-bottom: 2vw;
+}
+.main-component-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.main-component-header-left {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.main-component-header-left-title {
+  font-weight: bold;
+  font-size: 2vw;
+}
+.main-component-header-left-icon {
+  padding: 1vw;
+  background-color: #e7f6f0;
+  border-radius: 0.7vw;
+  margin-right: 2vw;
+}
+.main-component-header-right-delete {
+  padding: 0.4vw;
+  background-color: #f5f5f5;
+  border-radius: 0.7vw;
+}
+
+/* LOGIN GOOGLE */
+.login-google-layout {
+  margin: 1vw 1.5vw 0 1.5vw;
+}
+.login-google-header-layout {
+  display: flex;
+  align-items: center;
+  margin-top: 3vw;
+}
+.login-google-header-left-icon {
+  padding: 1.3vw;
+  background-color: #f5f5f5;
+  border-radius: 50%;
+  margin-right: 2vw;
+}
+.login-google-header-right-title {
+  font-weight: bold;
+  font-size: 2vw;
+}
+.login-google-header-right-subtitle {
+  color: #909090;
+  font-weight: 600;
+  font-size: 1.7vw;
+}
+.login-google-button {
+  padding: 0.4vw 1.3vw;
+  background-color: #2483f4;
   color: white;
+  font-weight: 600;
+  font-size: 1.5vw;
+  width: fit-content;
+  border-radius: 0.7vw;
+  margin: 2vw 0;
+  cursor: pointer;
 }
 
-.App-link {
-  color: #61dafb;
+/* FLOW NODE */
+.flow-node-button-layout {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f0f0f0;
+  border-radius: 10vw;
+  padding: 0.7vw 0;
+  cursor: pointer;
+  margin-top: 2vw;
 }
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.flow-node-button-icon {
+  margin-right: 1vw;
+}
+.flow-node-button-text {
+  font-weight: 600;
+  font-size: 1.5vw;
 }
