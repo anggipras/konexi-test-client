@@ -1,13 +1,20 @@
 import React from "react";
-import { ReorderOutlined } from "@mui/icons-material";
+import { ReactSVG } from "react-svg";
+import CoinStack from "../../assets/img/ic_coin.svg";
 import MainComponent from "./MainComponent";
 
-const LoginGoogle = () => {
+const FlowNode = () => {
   return (
     <MainComponent>
       <div className="flow-node-button-layout">
         <div className="flow-node-button-icon">
-          <ReorderOutlined sx={{ fontSize: "2.5vw", color: "#999999" }} />
+          <ReactSVG
+            beforeInjection={(svg) => {
+              svg.classList.add("flow-node-button-icon-content");
+              svg.setAttribute("style", "width: 2.5vw; height: 2.5vw;");
+            }}
+            src={CoinStack}
+          />
         </div>
         <div className="flow-node-button-text">
           Connect Flow Node to Import to Google Sheets
@@ -17,4 +24,4 @@ const LoginGoogle = () => {
   );
 };
 
-export default LoginGoogle;
+export default FlowNode;

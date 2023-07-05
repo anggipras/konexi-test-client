@@ -1,5 +1,7 @@
 import React from "react";
-import { DescriptionOutlined, DeleteOutlined } from "@mui/icons-material";
+import { ReactSVG } from "react-svg";
+import { DeleteOutlined } from "@mui/icons-material";
+import Sheets from "../../assets/img/ic_sheets.svg";
 
 const MainComponent = ({ children }) => {
   return (
@@ -7,7 +9,13 @@ const MainComponent = ({ children }) => {
       <div className="main-component-header">
         <div className="main-component-header-left">
           <div className="main-component-header-left-icon">
-            <DescriptionOutlined sx={{ fontSize: "2.5vw", color: "#22a864" }} />
+            <ReactSVG
+              beforeInjection={(svg) => {
+                svg.classList.add("main-component-header-left-icon-content");
+                svg.setAttribute("style", "width: 2.5vw; height: 2.5vw;");
+              }}
+              src={Sheets}
+            />
           </div>
           <div className="main-component-header-left-title">
             Export to Google Sheets

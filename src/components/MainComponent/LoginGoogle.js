@@ -1,5 +1,6 @@
 import React from "react";
-import { Google } from "@mui/icons-material";
+import { ReactSVG } from "react-svg";
+import Google from "../../assets/img/ic_google.svg";
 import MainComponent from "./MainComponent";
 
 const LoginGoogle = () => {
@@ -8,7 +9,13 @@ const LoginGoogle = () => {
       <div className="login-google-layout">
         <div className="login-google-header-layout">
           <div className="login-google-header-left-icon">
-            <Google sx={{ fontSize: "2.5vw", color: "#22a864" }} />
+            <ReactSVG
+              beforeInjection={(svg) => {
+                svg.classList.add("login-google-header-left-icon-content");
+                svg.setAttribute("style", "width: 2.5vw; height: 2.5vw;");
+              }}
+              src={Google}
+            />
           </div>
           <div className="login-google-header-right-layout">
             <div className="login-google-header-right-title">
