@@ -1,15 +1,14 @@
 import React, { useState, useRef } from "react";
 import { ReactSVG } from "react-svg";
 import { Close } from "@mui/icons-material";
+import "../../assets/css/FileExport.css";
 import Sheets from "../../assets/img/ic_sheets.svg";
 import ArrowDown from "../../assets/img/ic_down.svg";
 import MainComponent from "./MainComponent";
+import TabSelection from "../UtilsComponent/TabSelection";
 
 const FileExport = () => {
-  const [account, setAccount] = useState([
-    "guest@example.com",
-    "myaccount@example.com",
-  ]);
+  const [account] = useState(["guest@example.com", "myaccount@example.com"]);
   const [selectedAccount, setSelectedAccount] = useState("Account Name");
   const fileInputRef = useRef(null);
   const [selectedFile, setSelectedFile] = useState(null);
@@ -27,6 +26,10 @@ const FileExport = () => {
     fileInputRef.current.click();
   };
 
+  const handleRemoveFile = () => {
+    setSelectedFile(null);
+  };
+
   return (
     <MainComponent>
       <div className="file-export-layout">
@@ -41,7 +44,7 @@ const FileExport = () => {
                   type="radio"
                   id="0"
                   value="1"
-                  name="Ben"
+                  name="account"
                   checked="checked"
                 />
                 <p class="select-box__input-text">{selectedAccount}</p>
@@ -52,7 +55,7 @@ const FileExport = () => {
                   type="radio"
                   id="1"
                   value="2"
-                  name="Ben"
+                  name="account"
                 />
                 <p class="select-box__input-text">guest@example.com</p>
               </div>
@@ -62,7 +65,7 @@ const FileExport = () => {
                   type="radio"
                   id="2"
                   value="3"
-                  name="Ben"
+                  name="account"
                 />
                 <p class="select-box__input-text">myaccount@example.com</p>
               </div>
@@ -90,7 +93,7 @@ const FileExport = () => {
                   svg.classList.add("main-component-header-left-icon-content");
                   svg.setAttribute(
                     "style",
-                    "width: 2.5vw; height: 2.5vw; cursor: pointer"
+                    "width: 3vw; height: 3vw; cursor: pointer"
                   );
                 }}
                 src={Sheets}
@@ -109,7 +112,14 @@ const FileExport = () => {
               )}
             </div>
             <div className="file-export-getfile-content-right">
-              <Close sx={{ fontSize: "2.5vw" }} />
+              <TabSelection />
+              <div
+                style={{ display: selectedFile ? "block" : "none" }}
+                className="file-export-getfile-content-right"
+                onClick={handleRemoveFile}
+              >
+                <Close sx={{ fontSize: "2.5vw" }} />
+              </div>
             </div>
           </div>
         </div>

@@ -1,0 +1,32 @@
+.flow-node-button-layout {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f5f5f5;
+  border-radius: 10vw;
+  padding: 0.7vw 0;
+  cursor: pointer;
+  margin-top: 2vw;
+}
+.flow-node-button-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 3vw;
+  height: 3vw;
+  margin-right: 0.6vw;
+}
+.flow-node-button-icon > div > div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 3vw;
+  height: 3vw;
+}
+.flow-node-button-icon-content {
+  width: 2.5vw;
+}
+.flow-node-button-text {
+  font-weight: 600;
+  font-size: 1.5vw;
+}

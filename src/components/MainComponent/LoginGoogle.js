@@ -1,5 +1,6 @@
 import React from "react";
 import { ReactSVG } from "react-svg";
+import "../../assets/css/LoginGoogle.css";
 import Google from "../../assets/img/ic_google.svg";
 import MainComponent from "./MainComponent";
 

@@ -1,5 +1,6 @@
 import React from "react";
 import { ReactSVG } from "react-svg";
+import "../../assets/css/FlowNode.css";
 import CoinStack from "../../assets/img/ic_coin.svg";
 import MainComponent from "./MainComponent";
 

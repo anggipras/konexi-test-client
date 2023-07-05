@@ -1,0 +1,113 @@
+.tabselect-box {
+  position: relative;
+  display: block;
+  width: 8vw;
+  margin: 0 auto;
+  font-size: 1vw;
+  background-color: #f5f5f5;
+  border-radius: 10vw;
+}
+.tabselect-box__current {
+  position: relative;
+  cursor: pointer;
+  outline: none;
+}
+.tabselect-box__current:focus + .tabselect-box__list {
+  opacity: 1;
+  -webkit-animation-name: none;
+  animation-name: none;
+}
+.tabselect-box__current:focus + .tabselect-box__list .tabselect-box__option {
+  cursor: pointer;
+}
+.tabselect-box__current:focus .tabselect-box__icon {
+  transform: translateY(-50%) rotate(180deg);
+}
+.tabselect-box__icon {
+  position: absolute;
+  top: 50%;
+  right: 15px;
+  transform: translateY(-50%);
+  width: 1.2vw;
+  opacity: 0.5;
+  transition: 0.2s ease;
+}
+.tabselect-box__value {
+  display: flex;
+}
+.tabselect-box__input {
+  display: none;
+}
+.tabselect-box__input:checked + .tabselect-box__input-text {
+  display: block;
+}
+.tabselect-box__input-text {
+  display: none;
+  width: 100%;
+  margin: 0;
+  padding: 0.5vw 1.2vw;
+  background-color: #f5f5f5;
+  border-radius: 10vw;
+  font-weight: bold;
+  font-size: 1.3vw;
+  color: #888888;
+}
+.tabselect-box__list {
+  position: absolute;
+  width: 15vw;
+  padding: 0;
+  list-style: none;
+  opacity: 0;
+  -webkit-animation-name: HideList;
+  animation-name: HideList;
+  -webkit-animation-duration: 0.5s;
+  animation-duration: 0.5s;
+  -webkit-animation-delay: 0.5s;
+  animation-delay: 0.5s;
+  -webkit-animation-fill-mode: forwards;
+  animation-fill-mode: forwards;
+  -webkit-animation-timing-function: step-start;
+  animation-timing-function: step-start;
+  box-shadow: 0 15px 30px -10px rgba(0, 0, 0, 0.1);
+  border: 0.13vw solid #e5e5e5;
+  background-color: white;
+  border-radius: 1vw;
+  z-index: 1;
+  margin-top: 2vw;
+}
+.tabselect-box__list > li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 1vw;
+}
+.tabselect-box__option {
+  display: block;
+  padding: 15px;
+  background-color: #fff;
+  font-size: 1.5vw;
+  font-weight: 600;
+}
+.tabselect-box__option:hover,
+.tabselect-box__option:focus {
+  color: #546c84;
+  background-color: #fbfbfb;
+}
+
+@-webkit-keyframes HideList {
+  from {
+    transform: scaleY(1);
+  }
+  to {
+    transform: scaleY(0);
+  }
+}
+
+@keyframes HideList {
+  from {
+    transform: scaleY(1);
+  }
+  to {
+    transform: scaleY(0);
+  }
+}
