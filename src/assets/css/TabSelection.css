@@ -58,7 +58,7 @@
   padding: 0;
   list-style: none;
   opacity: 0;
-  -webkit-animation-name: HideList;
+  /* -webkit-animation-name: HideList;
   animation-name: HideList;
   -webkit-animation-duration: 0.5s;
   animation-duration: 0.5s;
@@ -67,7 +67,7 @@
   -webkit-animation-fill-mode: forwards;
   animation-fill-mode: forwards;
   -webkit-animation-timing-function: step-start;
-  animation-timing-function: step-start;
+  animation-timing-function: step-start; */
   box-shadow: 0 15px 30px -10px rgba(0, 0, 0, 0.1);
   border: 0.13vw solid #e5e5e5;
   background-color: white;

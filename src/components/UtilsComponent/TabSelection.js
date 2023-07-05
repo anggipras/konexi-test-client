@@ -1,19 +1,40 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { ReactSVG } from "react-svg";
 import { Search, Check } from "@mui/icons-material";
 import "../../assets/css/TabSelection.css";
 import ArrowDown from "../../assets/img/ic_down.svg";
 
+let steadyCond = false;
 const TabSelection = () => {
   const [tabSheet] = useState(["Tab 1", "Tab 2", "Tab 3"]);
   const [selectedTab, setSelectedTab] = useState("Tab 1");
+  const [selectCond, setSelectCond] = useState(false);
 
   const handleChangeTab = (val) => {
+    steadyCond = false;
     setSelectedTab(val);
   };
 
+  const openPopUp = () => {
+    if (!steadyCond) {
+      setSelectCond(!selectCond);
+    }
+  };
+
+  const steadyPopUp = (val) => {
+    steadyCond = val;
+  };
+
+  useEffect(() => {
+    const elements = document.getElementsByClassName("tabselect-box__list");
+    for (var i = 0; i < elements.length; i++) {
+      let element = elements[i];
+      element.style.opacity = selectCond ? 1 : 0;
+    }
+  }, [selectCond]);
+
   return (
-    <div class="tabselect-box">
+    <div class="tabselect-box" onClick={() => openPopUp()}>
       <div class="tabselect-box__current" tabindex="1">
         <div class="tabselect-box__value">
           <input
@@ -59,9 +80,16 @@ const TabSelection = () => {
         <img class="tabselect-box__icon" src={ArrowDown} alt="Arrow Icon" />
       </div>
       <ul class="tabselect-box__list">
-        <li>
-          {/* Continue in Search bar */}
-          <div>Search</div>
+        <li onClick={() => steadyPopUp(true)}>
+          <div class="tabselect-search-container">
+            <input type="text" placeholder="Search" />
+            <Search
+              sx={{
+                fontSize: "1.7vw",
+                color: "#888888",
+              }}
+            />
+          </div>
         </li>
         {tabSheet.map((val, idx) => {
           return (
