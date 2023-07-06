@@ -82,11 +82,15 @@
   border-radius: 1vw;
 }
 .tabselect-box__option {
-  display: block;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   padding: 15px;
   background-color: #fff;
   font-size: 1.5vw;
   font-weight: 600;
+  width: 100%;
+  cursor: pointer;
 }
 .tabselect-box__option:hover,
 .tabselect-box__option:focus {
@@ -110,4 +114,26 @@
   to {
     transform: scaleY(0);
   }
+}
+
+.tabselect-search-container {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  padding: 0.5vw;
+}
+.tabselect-search-container input[type="text"] {
+  padding: 1vw 0vw 1vw 3.5vw;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 13.5vw;
+}
+.tabselect-search-container .tabselect-search-container-ic {
+  position: absolute;
+  left: 1.5vw;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: transparent;
+  border: none;
 }

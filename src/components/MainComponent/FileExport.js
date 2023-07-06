@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useContext, useEffect } from "react";
 import { ReactSVG } from "react-svg";
 import { Close } from "@mui/icons-material";
 import "../../assets/css/FileExport.css";
@@ -6,19 +6,30 @@ import Sheets from "../../assets/img/ic_sheets.svg";
 import ArrowDown from "../../assets/img/ic_down.svg";
 import MainComponent from "./MainComponent";
 import TabSelection from "../UtilsComponent/TabSelection";
+import axios from "axios";
+import MyContext from "../../MyContext";
+import Swal from "sweetalert2";
 
 const FileExport = () => {
-  const [account] = useState(["guest@example.com", "myaccount@example.com"]);
+  const { state } = useContext(MyContext);
+  const [account, setAccount] = useState(["guest@konexi.com"]);
   const [selectedAccount, setSelectedAccount] = useState("Account Name");
   const fileInputRef = useRef(null);
   const [selectedFile, setSelectedFile] = useState(null);
+  const [selectedTab, setSelectedTab] = useState(null);
+
+  useEffect(() => {
+    if (state.loginCond) {
+      setAccount((act) => [...act, "mygoogleaccount@gmail.com"]);
+    }
+  }, [state.loginCond]);
 
   const handleChangeAccount = (val) => {
     setSelectedAccount(val);
   };
 
   const handleFileChange = (event) => {
-    const file = event.target.files[0];
+    const file = event.target.files[0].name;
     setSelectedFile(file);
   };
 
@@ -28,6 +39,39 @@ const FileExport = () => {
 
   const handleRemoveFile = () => {
     setSelectedFile(null);
+  };
+
+  const handleTab = (val) => {
+    setSelectedTab(val);
+  };
+
+  const submitData = async () => {
+    try {
+      const formData = new FormData();
+      formData.append("file", selectedFile);
+      formData.append("email", selectedAccount);
+      formData.append("sheetName", selectedTab);
+
+      await axios.post(
+        "https://script.google.com/macros/s/AKfycbxxXsxpnsztXY59XGohAcB0xZi1j_scUZO7ykKSBlsPWnUhuEPL31t8CFcSe5QUy7Qs/exec",
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+
+      Swal.fire({
+        icon: "success",
+        title: "Data has exported!",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+      console.log("File and email submitted successfully!");
+    } catch (error) {
+      console.error("Error submitting file and email:", error);
+    }
   };
 
   return (
@@ -107,12 +151,12 @@ const FileExport = () => {
               />
               {selectedFile && (
                 <div className="file-export-getfile-content-left-text">
-                  {selectedFile.name}
+                  {selectedFile}
                 </div>
               )}
             </div>
             <div className="file-export-getfile-content-right">
-              <TabSelection />
+              <TabSelection sendTab={handleTab} />
               <div
                 style={{ display: selectedFile ? "block" : "none" }}
                 className="file-export-getfile-content-right"
@@ -123,7 +167,11 @@ const FileExport = () => {
             </div>
           </div>
         </div>
-        <button disabled={!selectedFile} className="file-export-button">
+        <button
+          disabled={!selectedFile}
+          className="file-export-button"
+          onClick={() => submitData()}
+        >
           Export
         </button>
       </div>

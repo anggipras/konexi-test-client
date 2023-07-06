@@ -1,41 +1,70 @@
-import React, { useEffect, useState } from "react";
-import { ReactSVG } from "react-svg";
+import React, { useState } from "react";
 import { Search, Check } from "@mui/icons-material";
 import "../../assets/css/TabSelection.css";
 import ArrowDown from "../../assets/img/ic_down.svg";
 
-let steadyCond = false;
-const TabSelection = () => {
+const TabSelection = ({ sendTab }) => {
   const [tabSheet] = useState(["Tab 1", "Tab 2", "Tab 3"]);
+  const [selectedTabSheet, setSelectedTabSheet] = useState([
+    "Tab 1",
+    "Tab 2",
+    "Tab 3",
+  ]);
   const [selectedTab, setSelectedTab] = useState("Tab 1");
-  const [selectCond, setSelectCond] = useState(false);
-
-  const handleChangeTab = (val) => {
-    steadyCond = false;
-    setSelectedTab(val);
-  };
 
   const openPopUp = () => {
-    if (!steadyCond) {
-      setSelectCond(!selectCond);
-    }
-  };
-
-  const steadyPopUp = (val) => {
-    steadyCond = val;
-  };
-
-  useEffect(() => {
     const elements = document.getElementsByClassName("tabselect-box__list");
     for (var i = 0; i < elements.length; i++) {
       let element = elements[i];
-      element.style.opacity = selectCond ? 1 : 0;
+      element.style.opacity = 1;
     }
-  }, [selectCond]);
+  };
+
+  const handleBlur = () => {
+    const elements = document.getElementsByClassName("tabselect-box__list");
+    for (var i = 0; i < elements.length; i++) {
+      let element = elements[i];
+      element.style.opacity = 0;
+    }
+  };
+
+  const handleSearch = (e) => {
+    if (e.target.value) {
+      const newTabSheet = tabSheet.filter((val) =>
+        val.includes(e.target.value)
+      );
+      setSelectedTabSheet(newTabSheet);
+    } else {
+      setSelectedTabSheet(tabSheet);
+    }
+  };
+
+  const handleInsideTab = (val) => {
+    const elements = document.getElementsByClassName("tabselect-box__list");
+    for (var i = 0; i < elements.length; i++) {
+      let element = elements[i];
+      if (val === "steadyMenu") {
+        element.style.opacity = 1;
+      } else {
+        element.style.opacity = 0;
+        setSelectedTab(val);
+        sendTab(val);
+        if (val === "Tab 3") {
+          setTimeout(() => {
+            element.style.opacity = 0;
+          }, 10);
+        }
+      }
+    }
+  };
 
   return (
-    <div class="tabselect-box" onClick={() => openPopUp()}>
-      <div class="tabselect-box__current" tabindex="1">
+    <div class="tabselect-box" onBlur={() => handleBlur()}>
+      <div
+        class="tabselect-box__current"
+        tabindex="1"
+        onClick={() => openPopUp()}
+      >
         <div class="tabselect-box__value">
           <input
             class="tabselect-box__input"
@@ -80,32 +109,36 @@ const TabSelection = () => {
         <img class="tabselect-box__icon" src={ArrowDown} alt="Arrow Icon" />
       </div>
       <ul class="tabselect-box__list">
-        <li onClick={() => steadyPopUp(true)}>
+        <li onClick={() => handleInsideTab("steadyMenu")}>
           <div class="tabselect-search-container">
-            <input type="text" placeholder="Search" />
+            <input
+              type="text"
+              placeholder="Search"
+              onChange={(e) => handleSearch(e)}
+            />
             <Search
+              className="tabselect-search-container-ic"
               sx={{
-                fontSize: "1.7vw",
+                fontSize: "2.5vw",
                 color: "#888888",
               }}
             />
           </div>
         </li>
-        {tabSheet.map((val, idx) => {
+        {selectedTabSheet.map((val, idx) => {
           return (
-            <li onClick={() => handleChangeTab(val)}>
+            <li onClick={() => handleInsideTab(val)}>
               <label class="tabselect-box__option" for={idx + 1}>
-                {val}
+                {val}{" "}
+                {selectedTab === val ? (
+                  <Check
+                    sx={{
+                      fontSize: "1.7vw",
+                      color: "#2483f4",
+                    }}
+                  />
+                ) : null}
               </label>
-              {selectedTab === val ? (
-                <Check
-                  sx={{
-                    fontSize: "1.7vw",
-                    color: "#2483f4",
-                    marginRight: "1.5vw",
-                  }}
-                />
-              ) : null}
             </li>
           );
         })}
